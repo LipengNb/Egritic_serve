@@ -2,6 +2,7 @@
 
 module.exports = app => {
   class Controller extends app.Controller {
+    // 菜单管理
     async menus() {
       const { ctx } = this;
       const res = await this.service.systeam.getMenus();
@@ -36,6 +37,25 @@ module.exports = app => {
         code: 0,
         data: res,
       };
+    }
+    // 角色管理
+    async createRoles() {
+      const body = this.ctx.request.body;
+      try {
+        const data = await this.service.systeam.createRoles(body);
+        console.log(data);
+        this.ctx.returnBody(200, data, '创建成功', 0);
+      } catch (error) {
+        this.ctx.returnBody(200, error, '创建失败', 1);
+      }
+    }
+    async getRoles() {
+      try {
+        const res = await this.service.systeam.getRoles();
+        this.ctx.returnBody(200, res, '获取成功', 0);
+      } catch (error) {
+        this.ctx.returnBody(200, error, error.message, 1);
+      }
     }
   }
   return Controller;

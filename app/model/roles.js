@@ -2,16 +2,19 @@
 module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
-  const accountSchema = new Schema({
-    account: {
+  const rolesSchema = new Schema({
+    name: {
       type: String,
       required: true,
     },
-    password: {
-      type: String,
+    menus: {
+      type: Array,
+    },
+    enable: {
+      type: Boolean, Number,
       required: true,
     },
   });
 
-  return mongoose.model('Account', accountSchema, 'account');
+  return mongoose.model('Roles', rolesSchema, 'roles');
 };

@@ -3,8 +3,10 @@
 module.exports = app => {
   class Service extends app.Service {
     async login(params) {
-      const { ctx } = this;
-      return await ctx.model.Account.findOne(params);
+      return await this.ctx.model.User.findOne(params);
+    }
+    async getMenus() {
+      return await this.ctx.model.Menus.find();
     }
   }
   return Service;
