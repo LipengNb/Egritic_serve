@@ -3,9 +3,12 @@ module.exports = app => {
   const mongoose = app.mongoose;
   const Schema = mongoose.Schema;
   const rolesSchema = new Schema({
-    name: {
+    role_name: {
       type: String,
       required: true,
+    },
+    name: {
+      type: String,
     },
     menus: {
       type: Array,

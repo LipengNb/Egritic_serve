@@ -39,6 +39,14 @@ module.exports = app => {
       };
     }
     // 角色管理
+    async getRoles() {
+      try {
+        const res = await this.service.systeam.getRoles();
+        this.ctx.returnBody(200, res, '获取成功', 0);
+      } catch (error) {
+        this.ctx.returnBody(200, error, error.message, 1);
+      }
+    }
     async createRoles() {
       const body = this.ctx.request.body;
       try {
@@ -49,12 +57,32 @@ module.exports = app => {
         this.ctx.returnBody(200, error, '创建失败', 1);
       }
     }
-    async getRoles() {
+    async updateRoles() {
+      const { ctx } = this;
+      const body = ctx.request.body;
       try {
-        const res = await this.service.systeam.getRoles();
-        this.ctx.returnBody(200, res, '获取成功', 0);
+        const res = await this.service.systeam.updateMenus({ _id: body._id }, body);
+        this.ctx.returnBody(200, res, '修改成功', 0);
       } catch (error) {
         this.ctx.returnBody(200, error, error.message, 1);
+      }
+    }
+    // 账号管理
+    async getAccounts() {
+      try {
+        const data = await this.service.systeam.getAccounts();
+        this.ctx.returnBody(200, data, '获取成功', 0);
+      } catch (error) {
+        this.ctx.returnBody(200, error, '获取失败', 1);
+      }
+    }
+    async createAccounts() {
+      const body = this.ctx.request.body;
+      try {
+        const data = await this.service.systeam.createAccounts(body);
+        this.ctx.returnBody(200, data, '创建成功', 0);
+      } catch (error) {
+        this.ctx.returnBody(200, error, '创建失败', 1);
       }
     }
   }

@@ -13,7 +13,6 @@ module.exports = app => {
     },
     icon: {
       type: String,
-      required: true,
     },
     router: {
       type: String,
